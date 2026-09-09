@@ -3,48 +3,295 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const biens = [
+	{
+		lot: '014',
+		type: 'Terrain',
+		lieu: 'Ambohitrimanjaka, Antananarivo',
+		surface: '500 m²',
+		detail: 'Titre vert, terrain plat, accès route bitumée',
+	},
+	{
+		lot: '027',
+		type: 'Maison',
+		lieu: 'Ivandry, Antananarivo',
+		surface: '350 m² · 4 pièces',
+		detail: 'Villa avec jardin, quartier résidentiel calme',
+	},
+	{
+		lot: '032',
+		type: 'Terrain',
+		lieu: 'Ambatobe, Antananarivo',
+		surface: '1 000 m²',
+		detail: 'Vue dégagée, idéal projet de lotissement',
+	},
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+		<main class="nim">
+			<section class="hero">
+				<svg class="hero-plot" viewBox="0 0 400 300" aria-hidden="true">
+					<polygon points="40,240 120,40 320,70 360,220 180,270" />
+					<circle cx="40" cy="240" r="4" />
+					<circle cx="120" cy="40" r="4" />
+					<circle cx="320" cy="70" r="4" />
+					<circle cx="360" cy="220" r="4" />
+					<circle cx="180" cy="270" r="4" />
+				</svg>
+				<p class="hero-kicker">Ny Immobilier Madagascar</p>
+				<h1>La terre malgache, en toute confiance.</h1>
+				<p class="hero-lead">
+					Nous accompagnons familles et investisseurs dans l'achat de terrains et de maisons à
+					Madagascar, du choix du bien jusqu'à la signature de l'acte.
+				</p>
+				<a class="stamp-cta" href="#biens">Voir nos biens</a>
+			</section>
+
+			<section class="activites">
+				<div class="activite">
+					<svg class="icone" viewBox="0 0 48 48" aria-hidden="true">
+						<path d="M6 40 L18 10 L38 16 L42 38 Z" />
+						<circle cx="18" cy="10" r="2" />
+						<circle cx="38" cy="16" r="2" />
+					</svg>
+					<h2>Vente de terrains</h2>
+					<p>
+						Des parcelles vérifiées, avec un titre foncier en règle, sélectionnées dans les zones
+						les plus recherchées d'Antananarivo et de ses environs. Chaque terrain est visité et
+						contrôlé avant d'être proposé.
+					</p>
+				</div>
+				<div class="activite">
+					<svg class="icone" viewBox="0 0 48 48" aria-hidden="true">
+						<path d="M6 22 L24 8 L42 22 V40 H6 Z" />
+						<rect x="20" y="26" width="8" height="14" />
+					</svg>
+					<h2>Vente de maisons</h2>
+					<p>
+						Villas, appartements et maisons familiales, prêts à emménager ou à rénover, pour
+						tous les budgets. Nous vous aidons à trouver un bien qui correspond réellement à
+						votre projet de vie.
+					</p>
+				</div>
+			</section>
+
+			<section id="biens" class="biens">
+				<h2>Nos biens à la une</h2>
+				<p class="biens-intro">Une sélection de nos offres du moment, mise à jour régulièrement.</p>
+				<div class="registre">
+					{
+						biens.map((bien) => (
+							<div class="fiche">
+								<span class="fiche-lot">Lot n° {bien.lot}</span>
+								<div class="fiche-corps">
+									<h3>{bien.type} — {bien.lieu}</h3>
+									<p class="fiche-surface">{bien.surface}</p>
+									<p class="fiche-detail">{bien.detail}</p>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<section id="contact" class="contact">
+				<h2>Parlons de votre projet</h2>
+				<p>
+					Une question, un terrain à vendre, une maison à visiter ? Notre équipe vous répond
+					rapidement.
+				</p>
+				<ul class="contact-info">
+					<li>Antananarivo, Madagascar</li>
+					<li>+261 XX XX XXX XX</li>
+					<li>contact@nyimmobilier.mg</li>
+				</ul>
+				<a class="stamp-cta" href="mailto:contact@nyimmobilier.mg">Nous contacter</a>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.nim {
+		--papier: #f2ede1;
+		--encre: #1c2b22;
+		--tampon: #a63d2f;
+		--trait: #c9bfa0;
+		--or: #b8862e;
+		font-family: 'Inter', sans-serif;
+		color: var(--encre);
+		background: var(--papier);
+	}
+
+	.nim h1,
+	.nim h2 {
+		font-family: 'Fraunces', serif;
+		font-weight: 600;
+		line-height: 1.15;
+		margin: 0;
+	}
+
+	.hero {
+		position: relative;
+		padding: 5rem 1.5rem 4rem;
+		max-width: 640px;
+		margin: 0 auto;
+		text-align: left;
+		overflow: hidden;
+	}
+	.hero-plot {
+		position: absolute;
+		top: -20px;
+		right: -60px;
+		width: 320px;
+		height: 240px;
+		fill: none;
+		stroke: var(--or);
+		stroke-width: 1.5;
+		opacity: 0.35;
+		z-index: 0;
+	}
+	.hero-plot circle {
+		fill: var(--or);
+		stroke: none;
+	}
+	.hero-kicker {
+		font-size: 0.95rem;
+		color: var(--tampon);
+		margin: 0 0 0.5rem;
+		position: relative;
+	}
+	.hero h1 {
+		font-size: clamp(2rem, 5vw, 2.75rem);
+		position: relative;
+	}
+	.hero-lead {
+		max-width: 46ch;
+		margin: 1.25rem 0 2rem;
+		font-size: 1.05rem;
+		line-height: 1.6;
+		position: relative;
+	}
+
+	.stamp-cta {
+		display: inline-block;
+		border: 2px solid var(--encre);
+		color: var(--encre);
+		text-decoration: none;
+		font-family: 'Fraunces', serif;
+		padding: 0.65rem 1.5rem;
+		transform: rotate(-2deg);
+		transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+	}
+	.stamp-cta:hover {
+		transform: rotate(0deg);
+		background: var(--encre);
+		color: var(--papier);
+	}
+
+	.activites {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 2.5rem;
+		max-width: 900px;
+		margin: 2rem auto 4rem;
+		padding: 0 1.5rem;
+	}
+	.icone {
+		width: 40px;
+		height: 40px;
+		fill: none;
+		stroke: var(--tampon);
+		stroke-width: 2;
+		margin-bottom: 0.75rem;
+	}
+	.activite h2 {
+		font-size: 1.4rem;
+		margin-bottom: 0.5rem;
+	}
+	.activite p {
+		line-height: 1.6;
+		max-width: 42ch;
+	}
+
+	.biens {
+		max-width: 720px;
+		margin: 0 auto 4rem;
+		padding: 0 1.5rem;
+	}
+	.biens h2 {
+		font-size: 1.6rem;
+	}
+	.biens-intro {
+		margin: 0.5rem 0 2rem;
+		color: #4a4a42;
+	}
+	.registre {
+		border-top: 1px solid var(--trait);
+	}
+	.fiche {
+		display: flex;
+		gap: 1.25rem;
+		padding: 1.25rem 0;
+		border-bottom: 1px solid var(--trait);
+	}
+	.fiche-lot {
+		font-family: 'Fraunces', serif;
+		color: var(--or);
+		white-space: nowrap;
+		padding-top: 0.15rem;
+	}
+	.fiche-corps h3 {
+		font-family: 'Fraunces', serif;
+		font-size: 1.1rem;
+		margin: 0 0 0.35rem;
+	}
+	.fiche-surface {
+		margin: 0 0 0.35rem;
+		color: var(--tampon);
+		font-size: 0.95rem;
+	}
+	.fiche-detail {
+		margin: 0;
+		line-height: 1.5;
+		color: #4a4a42;
+	}
+
+	.contact {
+		max-width: 640px;
+		margin: 0 auto 5rem;
+		padding: 2.5rem 1.5rem;
+		border: 1px solid var(--trait);
+	}
+	.contact h2 {
+		font-size: 1.6rem;
+		margin-bottom: 0.75rem;
+	}
+	.contact-info {
+		list-style: none;
+		padding: 0;
+		margin: 1.5rem 0;
+		line-height: 1.9;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.stamp-cta {
+			transition: none;
+		}
+	}
+</style>
